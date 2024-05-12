@@ -47,7 +47,7 @@ class _EntryPageState extends State<EntryPage> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => HomePage(title: 'Home Page')),
+                      builder: (context) => HomePage(title: '麻雀リーグログ')),
                 );
               },
               child: const Text('Submit'),

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import './widgets/ranking.dart';
+import './widgets/history.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key, required this.title}) : super(key: key);
@@ -6,36 +8,6 @@ class HomePage extends StatefulWidget {
 
   @override
   State<HomePage> createState() => _HomePageState();
-}
-
-class RankingWidget extends StatelessWidget {
-  final List<String> rankingData;
-
-
-  RankingWidget({required this.rankingData});
-
-  @override
-  Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: rankingData.length,
-      itemBuilder: (context, index) {
-        return ListTile(
-          leading: Text('${index + 1}'),
-          title: Text(rankingData[index]),
-        );
-      },
-    );
-  }
-}
-
-
-class HistoryPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Text('This is the history page'),
-    );
-  }
 }
 
 class _HomePageState extends State<HomePage> {
@@ -50,8 +22,34 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     final List<Widget> _tabContents = <Widget>[ // ページウィジェットのリスト
-      RankingWidget(rankingData: ['A', 'B', 'C']),
-      HistoryPage(),
+      RankingWidget(rankingData: [
+        RankingData(userName: 'Alice', score: 100),
+        RankingData(userName: 'Bob', score: 40),
+        RankingData(userName: 'Charlie', score: -10),
+        RankingData(userName: 'Dave', score: -40),
+      ]),
+      HistoryWidget(
+        historyData: [
+          HistoryData(
+            date: DateTime.now(),
+            gameScores: [
+              GameScoreData(userName: 'Alice', rawScore: 30000, calculatedScore: 100),
+              GameScoreData(userName: 'Bob', rawScore: 25000, calculatedScore: 40),
+              GameScoreData(userName: 'Charlie', rawScore: 20000, calculatedScore: -10),
+              GameScoreData(userName: 'Dave', rawScore: 15000, calculatedScore: -40),
+            ],
+          ),
+          HistoryData(
+            date: DateTime.now().subtract(const Duration(days: 1)),
+            gameScores: [
+              GameScoreData(userName: 'Alice', rawScore: 30000, calculatedScore: 100),
+              GameScoreData(userName: 'Bob', rawScore: 25000, calculatedScore: 40),
+              GameScoreData(userName: 'Charlie', rawScore: 20000, calculatedScore: -10),
+              GameScoreData(userName: 'Dave', rawScore: 15000, calculatedScore: -40),
+            ],
+          ),
+        ],
+      ),
     ];
 
     return Scaffold(

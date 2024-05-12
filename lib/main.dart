@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'pages/entry.dart'; // 追加
+import 'pages/entry.dart';
 
 
 void main() {
