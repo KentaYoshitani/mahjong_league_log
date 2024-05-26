@@ -19,6 +19,123 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
+  List<String> _userNames = ['Alice', 'Bob', 'Charlie', 'Dave'];
+
+  void _onFloatingActionButtonPressed() {
+    DateTime _selectedDate = DateTime.now();
+    showDialog(
+      context: context,
+      builder: (context) {
+        return Dialog(
+          child: Container(
+            padding: EdgeInsets.all(8.0),
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisSize: MainAxisSize.min, // ダイアログのサイズを内容に合わせる
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text('記録する', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)), // タイトルを追加
+                  TextButton(
+                    onPressed: () async {
+                      final DateTime? picked = await showDatePicker(
+                        context: context,
+                        initialDate: _selectedDate,
+                        firstDate: DateTime(2000),
+                        lastDate: DateTime.now(),
+                      );
+                      if (picked != null && picked != _selectedDate) {
+                        _selectedDate = picked;
+                      }
+                    },
+                    child: Text('Select date'),
+                  ),
+                  DropdownButtonFormField<String>(
+                    items: _userNames.map((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value),
+                      );
+                    }).toList(),
+                    onChanged: (_) {},
+                    decoration: InputDecoration(
+                      labelText: 'userName1',
+                    ),
+                  ),
+                  TextFormField(
+                    keyboardType: TextInputType.number,
+                    decoration: InputDecoration(
+                      labelText: 'rawScore1',
+                    ),
+                  ),
+                  DropdownButtonFormField<String>(
+                    items: _userNames.map((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value),
+                      );
+                    }).toList(),
+                    onChanged: (_) {},
+                    decoration: InputDecoration(
+                      labelText: 'userName2',
+                    ),
+                  ),
+                  TextFormField(
+                    keyboardType: TextInputType.number,
+                    decoration: InputDecoration(
+                      labelText: 'rawScore2',
+                    ),
+                  ),
+                  DropdownButtonFormField<String>(
+                    items: _userNames.map((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value),
+                      );
+                    }).toList(),
+                    onChanged: (_) {},
+                    decoration: InputDecoration(
+                      labelText: 'userName3',
+                    ),
+                  ),
+                  TextFormField(
+                    keyboardType: TextInputType.number,
+                    decoration: InputDecoration(
+                      labelText: 'rawScore3',
+                    ),
+                  ),
+                  DropdownButtonFormField<String>(
+                    items: _userNames.map((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value),
+                      );
+                    }).toList(),
+                    onChanged: (_) {},
+                    decoration: InputDecoration(
+                      labelText: 'userName4',
+                    ),
+                  ),
+                  TextFormField(
+                    keyboardType: TextInputType.number,
+                    decoration: InputDecoration(
+                      labelText: 'rawScore4',
+                    ),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      // 送信ボタンが押されたときの処理をここに書く
+                    },
+                    child: Text('Submit'),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final List<Widget> _tabContents = <Widget>[ // ページウィジェットのリスト
@@ -85,6 +202,10 @@ class _HomePageState extends State<HomePage> {
         selectedItemColor: Colors.amber[800],
         onTap: _onNavigationBarItemTapped,
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _onFloatingActionButtonPressed,
+        child: Icon(Icons.add),
+      ), // これを追加
     );
   }
 }
